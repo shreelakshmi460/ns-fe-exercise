@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 interface Transaction {
   id: number;
@@ -56,11 +56,36 @@ const TransactionList: React.FC = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[15%]">Date</th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[10%]">Type</th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[20%]">Category</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-[35%]">Description</th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[20%]">Amount</th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[15%]"
+              >
+                Date
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[10%]"
+              >
+                Type
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[20%]"
+              >
+                Category
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-[35%]"
+              >
+                Description
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-[20%]"
+              >
+                Amount
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -70,9 +95,13 @@ const TransactionList: React.FC = () => {
                   {new Date(transaction.date).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-center">
-                  <span className={`px-2 inline-flex justify-center text-center text-xs leading-5 font-semibold rounded-full ${
-                    transaction.type === 'credit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                  }`}>
+                  <span
+                    className={`px-2 inline-flex justify-center text-center text-xs leading-5 font-semibold rounded-full ${
+                      transaction.type === 'credit'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}
+                  >
                     {transaction.type}
                   </span>
                 </td>
@@ -89,7 +118,9 @@ const TransactionList: React.FC = () => {
             ))}
             {transactions.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-6 py-4 text-center text-gray-500">No transactions found.</td>
+                <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                  No transactions found.
+                </td>
               </tr>
             )}
           </tbody>
@@ -99,4 +130,4 @@ const TransactionList: React.FC = () => {
   );
 };
 
-export default TransactionList;
+export default memo(TransactionList);
